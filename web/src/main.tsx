@@ -4,10 +4,10 @@ import { App } from "./App"
 import { Landing } from "./Landing"
 import "./styles.css"
 
-const Page = window.location.pathname.startsWith("/dashboard") ? App : Landing
+const page = window.location.pathname === "/dashboard" ? <App /> : <Landing />
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <Page />
+    {page}
   </StrictMode>,
 )

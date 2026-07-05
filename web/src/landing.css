@@ -39,7 +39,9 @@
 .relay-demo i { display:block; width:7px; height:7px; border-radius:50%; background:var(--acid); box-shadow:0 0 14px var(--acid); }
 .relay-demo h3 { margin:14px 0 0; font-size:23px; letter-spacing:-.04em; }
 .relay-demo p { max-width:250px; color:rgba(255,255,255,.4); font-size:12px; line-height:1.6; }
-.relay-demo.central { background:var(--acid); color:var(--black); }
+.relay-demo.central { position:relative; overflow:hidden; background:#252920; color:white; animation:acid-color linear both; animation-timeline:view(); animation-range:entry 15% cover 45%; }
+.relay-demo.central::before { content:""; position:absolute; inset:0; z-index:0; background:var(--acid); transform:scaleX(0); transform-origin:left; animation:acid-wipe linear both; animation-timeline:view(); animation-range:entry 15% cover 45%; }
+.relay-demo.central>* { position:relative; z-index:1; }
 .relay-demo.central>code, .relay-demo.central p { color:rgba(0,0,0,.5); }
 .relay-demo.central i { background:var(--black); box-shadow:none; }
 .flow-arrow { position:relative; display:flex; align-items:center; border-left:1px solid rgba(255,255,255,.14); border-right:1px solid rgba(255,255,255,.14); color:var(--acid); }
@@ -70,10 +72,26 @@
 .truth-card footer small { color:rgba(255,255,255,.3); }
 .final-cta { padding:95px max(40px,calc((100vw - 1360px)/2)); background:var(--acid); display:flex; align-items:flex-end; justify-content:space-between; gap:30px; }
 .final-cta h2 { margin:0; font-size:clamp(56px,8vw,110px); line-height:.87; letter-spacing:-.07em; }
-.final-cta a { display:flex; align-items:center; gap:18px; border-bottom:2px solid var(--black); padding-bottom:8px; font-weight:700; }
+.final-cta a { position:relative; display:flex; align-items:center; gap:18px; padding-bottom:11px; font-weight:700; }
+.final-cta a::after { content:""; position:absolute; left:0; bottom:0; width:62%; height:2px; background:var(--black); transition:transform .35s cubic-bezier(.22,1,.36,1),width .35s cubic-bezier(.22,1,.36,1); }
+.final-cta a:hover::after { width:70%; transform:translateX(12px); }
+.final-cta a svg { transition:transform .35s cubic-bezier(.22,1,.36,1); }
+.final-cta a:hover svg { transform:translate(3px,-3px); }
 .landing-footer { display:flex; align-items:center; justify-content:space-between; padding:30px 40px; background:var(--black); color:white; }
 .landing-brand.light span { background:var(--acid); color:var(--black); }
 .landing-footer p { margin:0; color:rgba(255,255,255,.35); font:8px "DM Mono"; letter-spacing:.12em; text-transform:uppercase; }
+@keyframes acid-color {
+  from { color:white; }
+  to { color:var(--black); }
+}
+@keyframes acid-wipe { to { transform:scaleX(1); } }
+@supports not (animation-timeline:view()) {
+  .relay-demo.central { color:var(--black); background:var(--acid); }
+}
+@media (prefers-reduced-motion:reduce) {
+  .relay-demo.central { animation:none; color:var(--black); background:var(--acid); }
+  .final-cta a::after,.final-cta a svg { transition:none; }
+}
 @media(max-width:760px) {
   .landing-nav,.landing-hero { padding-left:20px; padding-right:20px; }
   .landing-links { display:none; position:absolute; top:72px; left:20px; right:20px; padding:20px; background:var(--black); color:white; }

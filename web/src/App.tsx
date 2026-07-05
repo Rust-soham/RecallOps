@@ -27,7 +27,15 @@ import type {
   ProjectOverview,
 } from "./types"
 
-const PROJECT = "auth-migration"
+const PROJECT =
+  new URLSearchParams(window.location.search).get("project") ?? "auth-migration"
+
+function projectLabel(project: string): string {
+  return project
+    .split(/[-_]/)
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(" ")
+}
 
 function shortTime(value: string): string {
   return new Intl.DateTimeFormat("en", {
@@ -93,7 +101,7 @@ export function App() {
       const approved = await api.approve(
         candidate.id,
         current?.id ?? null,
-        "Security review supersedes the legacy browser-token design.",
+        `Reviewed evidence establishes ${candidate.subject} as current project truth.`,
       )
       setSelected(approved)
       await load()
@@ -156,7 +164,7 @@ export function App() {
               </strong>
               <small>
                 {overview?.memory_backend === "cognee" ? "cognee" : "deterministic"} ·
-                auth-migration
+                {" "}{PROJECT}
               </small>
             </div>
           </div>
@@ -170,7 +178,7 @@ export function App() {
       <main>
         <header className="topbar">
           <div className="breadcrumbs">
-            Projects <ChevronRight size={14} /> <strong>Auth migration</strong>
+            Projects <ChevronRight size={14} /> <strong>{projectLabel(PROJECT)}</strong>
           </div>
           <div className="live-pill">
             <Radio size={13} /> Live memory feed

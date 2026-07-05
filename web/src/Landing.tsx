@@ -3,6 +3,8 @@ import { motion } from "motion/react"
 import { useState } from "react"
 import "./landing.css"
 
+const GITHUB_URL = "https://github.com/Rust-soham/RecallOps"
+
 const features = [
   ["01", "Capture", "Agents record decisions, constraints, failures, and fixes through one shared MCP interface."],
   ["02", "Verify", "Review competing claims side by side, with the evidence that made each agent believe them."],
@@ -22,9 +24,9 @@ export function Landing() {
         <div className={`landing-links ${menuOpen ? "open" : ""}`}>
           <a href="#how">How it works</a>
           <a href="#proof">The proof</a>
-          <a href="https://github.com" target="_blank" rel="noreferrer"><Github size={14} /> GitHub</a>
+          <a href={GITHUB_URL} target="_blank" rel="noreferrer"><Github size={14} /> GitHub</a>
         </div>
-        <a className="landing-cta" href="/dashboard">Open dashboard <ArrowUpRight size={15} /></a>
+        <a className="landing-cta" href={GITHUB_URL} target="_blank" rel="noreferrer">View on GitHub <ArrowUpRight size={15} /></a>
         <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle navigation">
           {menuOpen ? <X /> : <Menu />}
         </button>
@@ -84,7 +86,7 @@ export function Landing() {
 
       <section className="final-cta">
         <h2>Switch agents.<br />Not context.</h2>
-        <a href="/dashboard">See it working <ArrowUpRight /></a>
+        <a href={GITHUB_URL} target="_blank" rel="noreferrer">Explore the project <ArrowUpRight /></a>
       </section>
 
       <footer className="landing-footer">
