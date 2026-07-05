@@ -1,0 +1,17 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "recallops": {
+      "type": "local",
+      "command": [
+        "/home/soham/.local/bin/uv",
+        "run",
+        "recallops-mcp"
+      ],
+      "cwd": "/home/soham/projects/cognee-hackathon",
+      "enabled": true,
+      "timeout": 15000
+    }
+  }
+}
+

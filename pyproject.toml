@@ -1,0 +1,54 @@
+[project]
+name = "recallops"
+version = "0.1.0"
+description = "A control plane for trustworthy shared AI-agent memory"
+requires-python = ">=3.12"
+dependencies = [
+  "fastapi>=0.115,<1",
+  "httpx>=0.28,<1",
+  "mcp>=1.12,<2",
+  "pydantic>=2.11,<3",
+  "pydantic-settings>=2.8,<3",
+  "returns>=0.25,<1",
+  "structlog>=25.2,<27",
+  "uvicorn[standard]>=0.34,<1",
+]
+
+[project.scripts]
+recallops-api = "recallops.main:run"
+recallops-mcp = "recallops.mcp_server:run"
+recallops-seed = "recallops.seed:run"
+
+[dependency-groups]
+dev = [
+  "hypothesis>=6.130,<7",
+  "mypy>=1.15,<2",
+  "pytest>=8.3,<9",
+  "pytest-cov>=6,<8",
+  "respx>=0.22,<1",
+  "ruff>=0.11,<1",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/recallops"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "RUF"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+plugins = ["returns.contrib.mypy.returns_plugin", "pydantic.mypy"]
+files = ["src", "tests"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q -s"

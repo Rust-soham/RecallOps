@@ -1,0 +1,10 @@
+[mcp_servers.recallops]
+command = "/home/soham/.local/bin/uv"
+args = ["run", "recallops-mcp"]
+cwd = "/home/soham/projects/cognee-hackathon"
+enabled = true
+required = true
+startup_timeout_sec = 15
+tool_timeout_sec = 45
+enabled_tools = ["recallops_record", "recallops_recall", "recallops_handoff"]
+
