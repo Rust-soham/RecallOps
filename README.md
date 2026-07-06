@@ -17,11 +17,11 @@ This repository contains the v0 vertical slice:
 - a live project-memory dashboard;
 - the prepared JWT-to-cookie authentication demo.
 
-## Reviewer walkthrough
+## Demo walkthrough
 
-This is the shortest path for a hackathon reviewer to run and verify the full
-cross-agent demo. It uses the deterministic local memory adapter, so no Cognee
-account or API key is required.
+This is the shortest path to run and verify the full cross-agent demo. It uses
+the deterministic local memory adapter, so no Cognee account or API key is
+required.
 
 ### 1. Clone and install
 
